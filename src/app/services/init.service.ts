@@ -14,29 +14,29 @@ export class InitProvider {
 
   load() {
     console.log('Run init data');
-    return new Promise((resolve, reject) => {
+    // return new Promise((resolve, reject) => {
 
-      const dataLocalStorage = localStorage.getItem(AUTH_HEADER);
-      if (!dataLocalStorage) {
-        this.global.isGuestUser = true;
-        return resolve(true);
-      }
+    //   const dataLocalStorage = localStorage.getItem(AUTH_HEADER);
+    //   if (!dataLocalStorage) {
+    //     this.global.isGuestUser = true;
+    //     return resolve(true);
+    //   }
 
-      this.userService.auth().then(res => {
+    //   this.userService.auth().then(res => {
 
-        if (!res.status) {
-          this.global.isGuestUser = true;
-          return resolve(true);
-        }
+    //     if (!res.status) {
+    //       this.global.isGuestUser = true;
+    //       return resolve(true);
+    //     }
 
-        this.global.user = res.data.user;
-        return resolve(true);
+    //     this.global.user = res.data.user;
+    //     return resolve(true);
 
-      }).catch(err => {
-        return resolve(true);
-      });
+    //   }).catch(err => {
+    //     return resolve(true);
+    //   });
 
-    });
+    // });
   }
 
 }

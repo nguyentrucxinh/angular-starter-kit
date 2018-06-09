@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from './../services/user.service';
 import { Global } from '../services/global';
@@ -12,7 +12,8 @@ export class RoleGuard implements CanActivate {
     private global: Global) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    // state.url -> redirect url
     const expectedRole = route.data.expectedRole;
     if (this.global.user) {
       return this.global.user.role_id === expectedRole;
@@ -23,10 +24,12 @@ export class RoleGuard implements CanActivate {
             if (res.status && res.data.id && res.data.role_id === expectedRole) {
               return resolve(true);
             }
+            localStorage.removeItem('Authorization');
             this.router.navigate(['login']);
             return resolve(false);
           })
           .catch(err => {
+            localStorage.removeItem('Authorization');
             this.router.navigate(['login']);
             return resolve(false);
           });
