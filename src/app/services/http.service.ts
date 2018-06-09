@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Headers, RequestOptions, RequestOptionsArgs, RequestMethod, Request } from '@angular/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/finally';
+import { map } from 'rxjs/operators';
+// import 'rxjs/add/operator/finally';
 import { Global } from './global';
 import { AUTH_HEADER, API_URL, CONTENT_TYPE_JSON } from '../constants/constants';
 
@@ -68,10 +68,10 @@ export class HttpService {
     return Observable.create((observer) => {
       this.process.next(Action.QueryStart);
       this._http.request(new Request(requestOptions))
-        .map(res => res.json())
-        .finally(() => {
-          this.process.next(Action.QueryStop);
-        })
+        .pipe(map(res => res.json()))
+        // .finally(() => {
+        //   this.process.next(Action.QueryStop);
+        // })
         .subscribe(
           (res: Object) => {
             observer.next(res);

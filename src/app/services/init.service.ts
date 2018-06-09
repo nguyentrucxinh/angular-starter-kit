@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Global, UserService } from './services';
+import { Global } from './global';
+import { UserService } from './user.service';
 import { AUTH_HEADER } from '../constants/constants';
 
 @Injectable()
