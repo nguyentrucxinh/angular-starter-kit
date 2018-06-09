@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Global } from '../../services/global';
@@ -14,7 +14,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted: boolean;
 
+  redirectUrl = '';
+
   constructor(private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private authService: AuthService,
     private global: Global) {
@@ -27,6 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => this.redirectUrl = params['redirectUrl'] || '/home');
   }
 
   async login() {
@@ -50,7 +55,7 @@ export class LoginComponent implements OnInit {
     }
     this.global.user = res2.data;
 
-    this.router.navigate(['home']);
+    this.router.navigateByUrl(this.redirectUrl);
   }
 
   // FORM CONTROL

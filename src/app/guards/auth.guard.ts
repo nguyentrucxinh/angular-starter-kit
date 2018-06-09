@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     console.log('AuthGuard');
-    // state.url -> redirect url
+    console.log('Redirect URL', state.url);
     if (this.global.user) {
       return true;
     } else {
@@ -26,12 +26,12 @@ export class AuthGuard implements CanActivate {
               return resolve(true);
             }
             LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login']);
+            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
             return resolve(false);
           })
           .catch(err => {
             LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login']);
+            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
             return resolve(false);
           });
       });

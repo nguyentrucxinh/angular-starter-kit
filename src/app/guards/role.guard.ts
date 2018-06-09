@@ -24,7 +24,7 @@ export class RoleGuard implements CanActivate, CanActivateChild {
   }
 
   private performCheck(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-    // state.url -> redirect url
+    console.log('Redirect URL', state.url);
     const expectedRole = next.data.expectedRole;
     if (this.global.user) {
       return this.global.user.role_id === expectedRole;
@@ -36,12 +36,12 @@ export class RoleGuard implements CanActivate, CanActivateChild {
               return resolve(true);
             }
             LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login']);
+            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
             return resolve(false);
           })
           .catch(err => {
             LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login']);
+            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
             return resolve(false);
           });
       });
