@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin.routing';
 import { AdminComponent } from './admin.component';
-import { AdminHomeComponent, AdminLoginComponent } from './pages/pages';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminHomeComponent } from './pages/pages';
+import { RoleGuard } from '../guards/role.guard';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    AdminHomeComponent,
-    AdminLoginComponent
+    AdminHomeComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+    // FormsModule,
+    // ReactiveFormsModule,
     AdminRoutingModule
   ],
-  providers: [],
+  providers: [RoleGuard],
   exports: [AdminComponent]
 })
 export class AdminModule {

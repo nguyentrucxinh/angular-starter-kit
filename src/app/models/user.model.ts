@@ -6,4 +6,5 @@ export class User {
   lastName: string;
   fullName: string;
   active: boolean;
+  role_id: number;
 }

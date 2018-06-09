@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../../../services/user.service';
-import { Global } from '../../../services/global';
+import { UserService } from '../../services/user.service';
+import { Global } from '../../services/global';
 
 @Component({
-  selector: 'app-admin-login',
-  templateUrl: './admin-login.component.html'
+  selector: 'app-login',
+  templateUrl: './login.component.html'
 })
-export class AdminLoginComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitted: boolean;

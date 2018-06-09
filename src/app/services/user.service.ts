@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { AUTH_HEADER } from '../constants/constants';
+import { AUTH_HEADER, AUTH_TOKEN_TYPE } from '../constants/constants';
 
 @Injectable()
 export class UserService {
@@ -16,6 +16,6 @@ export class UserService {
   }
 
   setTokenToLocalStorage(token: string): void {
-    localStorage.setItem(AUTH_HEADER, 'Bearer ' + token);
+    localStorage.setItem(AUTH_HEADER, `${AUTH_TOKEN_TYPE} ${token}`);
   }
 }

@@ -1,18 +1,19 @@
 import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/pages';
+import { HomeComponent, LoginComponent, LandingComponent } from './pages/pages';
 import { Config } from './services/config';
 import { Global } from './services/global';
 import { HttpService } from './services/http.service';
 import { GlobalErrorHandler } from './services/global-error-handle';
 import { InitProvider } from './services/init.service';
 import { UserService } from './services/user.service';
+import { RoleGuard } from './guards/role.guard';
 
 function loadInitData(provider: InitProvider) {
   return () => provider.load();
@@ -21,12 +22,14 @@ function loadInitData(provider: InitProvider) {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LandingComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    // FormsModule,
-    // ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     AdminModule
@@ -37,6 +40,7 @@ function loadInitData(provider: InitProvider) {
     HttpService,
     UserService,
     InitProvider,
+    RoleGuard,
     { provide: ErrorHandler, useClass: GlobalErrorHandler, },
     { provide: APP_INITIALIZER, useFactory: loadInitData, deps: [InitProvider], multi: true },
   ],
