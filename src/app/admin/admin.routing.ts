@@ -14,7 +14,7 @@ const adminRoutes: Routes = [
     children: [
       {
         path: '',
-        canActivate: [RoleGuard],
+        canActivateChild: [RoleGuard],
         data: { expectedRole: ADMIN_ROLE },
         children: [
           { path: '', component: AdminHomeComponent }

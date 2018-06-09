@@ -9,8 +9,16 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard], data: { expectedRole: USER_ROLE } },
-  // { path: '**', component: PageNotFoundComponent }
+  {
+    path: '',
+    canActivateChild: [RoleGuard],
+    data: { expectedRole: USER_ROLE },
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      // Another route here
+      // { path: '**', component: PageNotFoundComponent }
+    ]
+  }
 ];
 
 @NgModule({

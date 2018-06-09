@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './../services/auth.service';
 import { Global } from '../services/global';
 import { LocalStorageHelper } from '../helpers/helpers';
 
 @Injectable()
-export class RoleGuard implements CanActivate {
+export class RoleGuard implements CanActivate, CanActivateChild {
 
   constructor(private router: Router,
     private authService: AuthService,
     private global: Global) {
   }
 
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('RoleGuard - canActivateChild - Expected role', childRoute.data.expectedRole);
+    return this.performCheck(childRoute, state);
+  }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('RoleGuard', route.data.expectedRole);
+    console.log('RoleGuard - canActivate - Expected role', route.data.expectedRole);
+    return this.performCheck(route, state);
+  }
+
+  private performCheck(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
     // state.url -> redirect url
-    const expectedRole = route.data.expectedRole;
+    const expectedRole = next.data.expectedRole;
     if (this.global.user) {
       return this.global.user.role_id === expectedRole;
     } else {
