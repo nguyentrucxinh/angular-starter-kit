@@ -17,7 +17,7 @@ export class HttpService {
   constructor(private _http: Http, public global: Global) {
   }
 
-  private _buildAuthHeader(): string {
+  public getTokenFromLocalStorage(): string {
     return localStorage.getItem(AUTH_HEADER);
   }
 
@@ -61,7 +61,7 @@ export class HttpService {
       requestOptions.headers = new Headers();
     }
 
-    requestOptions.headers.set(AUTH_HEADER, this._buildAuthHeader());
+    requestOptions.headers.set(AUTH_HEADER, this.getTokenFromLocalStorage());
     requestOptions.headers.set('Content-Type', CONTENT_TYPE_JSON);
     requestOptions.headers.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Key');
 

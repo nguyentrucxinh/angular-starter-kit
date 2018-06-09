@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { ReactiveFormsModule } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app.routing';
@@ -25,7 +25,8 @@ function loadInitData(provider: InitProvider) {
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
+    // FormsModule,
+    // ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     AdminModule

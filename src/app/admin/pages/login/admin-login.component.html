@@ -1,0 +1,21 @@
+<h1>Admin Login</h1>
+
+<form (submit)="login()" [formGroup]="loginForm">
+  <label>Email:</label>
+  <input type="text" formControlName="email" autofocus>
+  <div *ngIf="email.errors && (email.dirty || email.touched) || isSubmitted" class="text-left">
+    <div *ngIf="email.invalid" style="color: red">{{getErrorEmail()}}</div>
+  </div>
+
+  <br>
+
+  <label>Password:</label>
+  <input type="password" formControlName="password">
+  <div *ngIf="password.errors && (password.dirty || password.touched) || isSubmitted" class="text-left">
+    <div *ngIf="password.invalid" style="color: red">{{getErrorPassword()}}</div>
+  </div>
+
+  <br>
+
+  <button type="submit">Login</button>
+</form>

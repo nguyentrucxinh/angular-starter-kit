@@ -22,14 +22,14 @@ export class InitProvider {
         return resolve(true);
       }
 
-      this.userService.auth().then(data => {
+      this.userService.auth().then(res => {
 
-        if (!data.status) {
+        if (!res.status) {
           this.global.isGuestUser = true;
           return resolve(true);
         }
 
-        this.global.user = data.data.user;
+        this.global.user = res.data.user;
         return resolve(true);
 
       }).catch(err => {
