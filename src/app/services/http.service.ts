@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 // import 'rxjs/add/operator/finally';
 import { Global } from './global';
 import { AUTH_HEADER, API_URL, CONTENT_TYPE_JSON } from '../constants/constants';
-import { LocalStorageHelper } from '../helpers/localStorage.helper';
+import { LocalStorageHelper } from '../helpers/helpers';
 
 export enum Action { QueryStart, QueryStop }
 

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Global } from '../../services/global';
-import { LocalStorageHelper } from '../../helpers/localStorage.helper';
+import { LocalStorageHelper } from '../../helpers/helpers';
 
 @Component({
   selector: 'app-login',

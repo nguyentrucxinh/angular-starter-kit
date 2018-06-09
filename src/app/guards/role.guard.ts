@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { UserService } from './../services/user.service';
 import { Global } from '../services/global';
-import { LocalStorageHelper } from '../helpers/localStorage.helper';
+import { LocalStorageHelper } from '../helpers/helpers';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
