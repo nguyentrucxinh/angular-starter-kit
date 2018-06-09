@@ -12,9 +12,8 @@ import { Global } from './services/global';
 import { HttpService } from './services/http.service';
 import { GlobalErrorHandler } from './services/global-error-handle';
 import { InitProvider } from './services/init.service';
-import { UserService } from './services/user.service';
-import { RoleGuard } from './guards/role.guard';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthService } from './services/auth.service';
+import { RoleGuard, AnonymousGuard } from './guards/guards';
 
 function loadInitData(provider: InitProvider) {
   return () => provider.load();
@@ -40,10 +39,10 @@ function loadInitData(provider: InitProvider) {
     Config,
     Global,
     HttpService,
-    UserService,
+    AuthService,
     InitProvider,
     RoleGuard,
-    AuthGuard,
+    AnonymousGuard,
     { provide: ErrorHandler, useClass: GlobalErrorHandler, },
     { provide: APP_INITIALIZER, useFactory: loadInitData, deps: [InitProvider], multi: true },
   ],

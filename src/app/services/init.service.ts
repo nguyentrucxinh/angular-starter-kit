@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Global } from './global';
-import { UserService } from './user.service';
+import { AuthService } from './auth.service';
 import { AUTH_HEADER } from '../constants/constants';
 
 @Injectable()
@@ -9,7 +9,7 @@ export class InitProvider {
 
   constructor(
     private global: Global,
-    private userService: UserService) {
+    private authService: AuthService) {
   }
 
   load() {
@@ -22,7 +22,7 @@ export class InitProvider {
     //     return resolve(true);
     //   }
 
-    //   this.userService.auth().then(res => {
+    //   this.authService.auth().then(res => {
 
     //     if (!res.status) {
     //       this.global.isGuestUser = true;

@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from './../services/user.service';
+import { AuthService } from './../services/auth.service';
 import { Global } from '../services/global';
 import { LocalStorageHelper } from '../helpers/helpers';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AnonymousGuard implements CanActivate {
 
   constructor(private router: Router,
-    private userService: UserService,
+    private authService: AuthService,
     private global: Global) {
   }
 

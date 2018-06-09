@@ -3,7 +3,7 @@ import { HttpService } from './http.service';
 import { AUTH_HEADER, AUTH_TOKEN_TYPE } from '../constants/constants';
 
 @Injectable()
-export class UserService {
+export class AuthService {
 
   constructor(private http: HttpService) { }
 

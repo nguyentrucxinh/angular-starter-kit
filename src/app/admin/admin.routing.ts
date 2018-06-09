@@ -10,7 +10,7 @@ const adminRoutes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    // canActivate: [AuthGuard],
+    // canActivate: [AnonymousGuard],
     children: [
       {
         path: '',

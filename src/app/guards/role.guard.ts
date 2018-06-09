@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from './../services/user.service';
+import { AuthService } from './../services/auth.service';
 import { Global } from '../services/global';
 import { LocalStorageHelper } from '../helpers/helpers';
 
@@ -9,7 +9,7 @@ import { LocalStorageHelper } from '../helpers/helpers';
 export class RoleGuard implements CanActivate {
 
   constructor(private router: Router,
-    private userService: UserService,
+    private authService: AuthService,
     private global: Global) {
   }
 
@@ -20,7 +20,7 @@ export class RoleGuard implements CanActivate {
       return this.global.user.role_id === expectedRole;
     } else {
       return new Promise((resolve) => {
-        this.userService.auth()
+        this.authService.auth()
           .then((res) => {
             if (res.status && res.data.id && res.data.role_id === expectedRole) {
               return resolve(true);

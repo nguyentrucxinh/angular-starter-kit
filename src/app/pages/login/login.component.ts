@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { Global } from '../../services/global';
 import { LocalStorageHelper } from '../../helpers/helpers';
 
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
     private fb: FormBuilder,
-    private userService: UserService,
+    private authService: AuthService,
     private global: Global) {
     this.loginForm = this.fb.group({
       // email: [null, Validators.compose([Validators.required, Validators.email])],
@@ -37,14 +37,14 @@ export class LoginComponent implements OnInit {
     }
     this.isSubmitted = false;
 
-    const res = await this.userService.token(this.loginForm.value);
+    const res = await this.authService.token(this.loginForm.value);
     if (!res.status) {
       return;
     }
     const token = res.data;
     LocalStorageHelper.setAuthorization(token);
 
-    const res2 = await this.userService.auth();
+    const res2 = await this.authService.auth();
     if (!res2.status) {
       return;
     }
