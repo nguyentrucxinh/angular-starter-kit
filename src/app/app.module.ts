@@ -6,14 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
-import { HomeComponent, LoginComponent, LandingComponent, PageNotFoundComponent } from './pages/pages';
+import { HomeComponent, LoginComponent, LandingComponent, PageNotFoundComponent, DashboardComponent } from './pages/pages';
 import { Config } from './services/config';
 import { Global } from './services/global';
 import { HttpService } from './services/http.service';
 import { GlobalErrorHandler } from './services/global-error-handle';
 import { InitProvider } from './services/init.service';
 import { AuthService } from './services/auth.service';
-import { RoleGuard, AnonymousGuard } from './guards/guards';
+import { RoleGuard, AnonymousGuard, AuthGuard } from './guards/guards';
 
 function loadInitData(provider: InitProvider) {
   return () => provider.load();
@@ -23,6 +23,7 @@ function loadInitData(provider: InitProvider) {
   declarations: [
     AppComponent,
     HomeComponent,
+    DashboardComponent,
     LandingComponent,
     LoginComponent,
     PageNotFoundComponent
@@ -41,6 +42,7 @@ function loadInitData(provider: InitProvider) {
     HttpService,
     AuthService,
     InitProvider,
+    AuthGuard,
     RoleGuard,
     AnonymousGuard,
     { provide: ErrorHandler, useClass: GlobalErrorHandler, },
