@@ -1,12 +1,11 @@
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
+import { GlobalErrorHandler } from './global-error-handle';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-// import { AdminComponent } from './admin/admin.component';
-// import { AdminHomeComponent } from './admin/pages/home/admin-home.component';
+import { HomeComponent } from './pages/pages';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,12 @@ import { HomeComponent } from './pages/home/home.component';
     AppRoutingModule,
     AdminModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-// import { AdminComponent } from './admin/admin.component';
-// import { AdminHomeComponent } from './admin/pages/home/admin-home.component';
 
 @NgModule({
   imports: [
