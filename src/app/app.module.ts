@@ -1,11 +1,15 @@
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
 
-import { GlobalErrorHandler } from './global-error-handle';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/pages';
+import { Config, Global, HttpService, GlobalErrorHandler, InitProvider } from './services/services';
+
+function loadInitData(provider: InitProvider) {
+  return () => provider.load();
+}
 
 @NgModule({
   declarations: [
@@ -18,10 +22,11 @@ import { HomeComponent } from './pages/pages';
     AdminModule
   ],
   providers: [
-    {
-      provide: ErrorHandler,
-      useClass: GlobalErrorHandler,
-    }
+    Config,
+    Global,
+    HttpService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler, },
+    { provide: APP_INITIALIZER, useFactory: loadInitData, deps: [InitProvider], multi: true },
   ],
   bootstrap: [AppComponent]
 })
