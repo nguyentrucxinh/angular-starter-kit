@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { UserService } from './../services/user.service';
 import { Global } from '../services/global';
+import { LocalStorageHelper } from '../helpers/localStorage.helper';
 
 @Injectable()
 export class RoleGuard implements CanActivate {
@@ -24,12 +25,12 @@ export class RoleGuard implements CanActivate {
             if (res.status && res.data.id && res.data.role_id === expectedRole) {
               return resolve(true);
             }
-            localStorage.removeItem('Authorization');
+            LocalStorageHelper.removeAuthorization();
             this.router.navigate(['login']);
             return resolve(false);
           })
           .catch(err => {
-            localStorage.removeItem('Authorization');
+            LocalStorageHelper.removeAuthorization();
             this.router.navigate(['login']);
             return resolve(false);
           });

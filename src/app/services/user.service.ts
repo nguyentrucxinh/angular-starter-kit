@@ -14,8 +14,4 @@ export class UserService {
   auth(): Promise<any> {
     return this.http.get('jwt/auth').toPromise();
   }
-
-  setTokenToLocalStorage(token: string): void {
-    localStorage.setItem(AUTH_HEADER, `${AUTH_TOKEN_TYPE} ${token}`);
-  }
 }

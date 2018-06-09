@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 // import 'rxjs/add/operator/finally';
 import { Global } from './global';
 import { AUTH_HEADER, API_URL, CONTENT_TYPE_JSON } from '../constants/constants';
+import { LocalStorageHelper } from '../helpers/localStorage.helper';
 
 export enum Action { QueryStart, QueryStop }
 
@@ -15,10 +16,6 @@ export class HttpService {
   authFailed: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private _http: Http, public global: Global) {
-  }
-
-  public getTokenFromLocalStorage(): string {
-    return localStorage.getItem(AUTH_HEADER);
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<any> {
@@ -61,7 +58,7 @@ export class HttpService {
       requestOptions.headers = new Headers();
     }
 
-    requestOptions.headers.set(AUTH_HEADER, this.getTokenFromLocalStorage());
+    requestOptions.headers.set(AUTH_HEADER, LocalStorageHelper.getAuthorization());
     requestOptions.headers.set('Content-Type', CONTENT_TYPE_JSON);
     requestOptions.headers.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Key');
 

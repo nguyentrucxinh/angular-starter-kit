@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Global } from '../../services/global';
+import { LocalStorageHelper } from '../../helpers/localStorage.helper';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     const token = res.data;
-    this.userService.setTokenToLocalStorage(token);
+    LocalStorageHelper.setAuthorization(token);
 
     const res2 = await this.userService.auth();
     if (!res2.status) {

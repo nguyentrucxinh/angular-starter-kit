@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Observable } from 'rxjs';
 import { UserService } from './../services/user.service';
 import { Global } from '../services/global';
+import { LocalStorageHelper } from '../helpers/localStorage.helper';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -14,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     // state.url -> redirect url
-    if (!localStorage.getItem('Authorization')) {
+    if (!LocalStorageHelper.getAuthorization()) {
       return true;
     }
     this.router.navigate(['home']);
