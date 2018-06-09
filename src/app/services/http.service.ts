@@ -15,30 +15,30 @@ export class HttpService {
   process: EventEmitter<any> = new EventEmitter<any>();
   authFailed: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private _http: Http, public global: Global) {
+  constructor(private _http: Http, private global: Global) {
   }
 
-  public get(url: string, options?: RequestOptionsArgs): Observable<any> {
+  get(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this._request(RequestMethod.Get, url, null, options);
   }
 
-  public post(url: string, body: string, options?: RequestOptionsArgs): Observable<any> {
+  post(url: string, body: string, options?: RequestOptionsArgs): Observable<any> {
     return this._request(RequestMethod.Post, url, body, options);
   }
 
-  public put(url: string, body: string, options?: RequestOptionsArgs): Observable<any> {
+  put(url: string, body: string, options?: RequestOptionsArgs): Observable<any> {
     return this._request(RequestMethod.Put, url, body, options);
   }
 
-  public delete(url: string, options?: RequestOptionsArgs): Observable<any> {
+  delete(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this._request(RequestMethod.Delete, url, null, options);
   }
 
-  public patch(url: string, body: string, options?: RequestOptionsArgs): Observable<any> {
+  patch(url: string, body: string, options?: RequestOptionsArgs): Observable<any> {
     return this._request(RequestMethod.Patch, url, body, options);
   }
 
-  public head(url: string, options?: RequestOptionsArgs): Observable<any> {
+  head(url: string, options?: RequestOptionsArgs): Observable<any> {
     return this._request(RequestMethod.Head, url, null, options);
   }
 

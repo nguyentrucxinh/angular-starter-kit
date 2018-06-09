@@ -13,7 +13,7 @@ export class InitProvider {
   }
 
   load() {
-    console.log('Run init data');
+    console.log('InitProvider');
     // return new Promise((resolve, reject) => {
 
     //   const dataLocalStorage = localStorage.getItem(AUTH_HEADER);

@@ -14,6 +14,7 @@ export class RoleGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('RoleGuard', route.data.expectedRole);
     // state.url -> redirect url
     const expectedRole = route.data.expectedRole;
     if (this.global.user) {

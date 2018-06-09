@@ -14,6 +14,7 @@ export class AnonymousGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    console.log('AnonymousGuard');
     // state.url -> redirect url
     if (!LocalStorageHelper.getAuthorization()) {
       return true;

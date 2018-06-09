@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard], data: { expectedRole: USER_ROLE } },
-  { path: '**', component: PageNotFoundComponent }
+  // { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
