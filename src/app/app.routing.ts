@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent, LoginComponent, LandingComponent, PageNotFoundComponent, DashboardComponent } from './pages/pages';
+import {
+  HomeComponent,
+  LoginComponent,
+  LandingComponent,
+  PageNotFoundComponent,
+  DashboardComponent,
+  PageAccessDeniedComponent
+} from './pages/pages';
 import { USER_ROLE } from './constants/constants';
 import { RoleGuard, AnonymousGuard, AuthGuard } from './guards/guards';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
+  { path: '403', component: PageAccessDeniedComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },

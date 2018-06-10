@@ -6,7 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
-import { HomeComponent, LoginComponent, LandingComponent, PageNotFoundComponent, DashboardComponent } from './pages/pages';
+import {
+  HomeComponent,
+  LoginComponent,
+  LandingComponent,
+  PageNotFoundComponent,
+  DashboardComponent,
+  PageAccessDeniedComponent
+} from './pages/pages';
 import { Config } from './services/config';
 import { Global } from './services/global';
 import { HttpService } from './services/http.service';
@@ -26,7 +33,8 @@ function loadInitData(provider: InitProvider) {
     DashboardComponent,
     LandingComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PageAccessDeniedComponent
   ],
   imports: [
     BrowserModule,

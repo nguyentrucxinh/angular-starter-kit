@@ -22,19 +22,22 @@ export class AuthGuard implements CanActivate {
       return new Promise((resolve) => {
         this.authService.auth()
           .then((res) => {
-            if (res.status) {
-              return resolve(true);
+            if (!res.status) {
+              this.redirectToLogin(state.url);
+              return resolve(false);
             }
-            LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
-            return resolve(false);
+            return resolve(true);
           })
           .catch(err => {
-            LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
+            this.redirectToLogin(state.url);
             return resolve(false);
           });
       });
     }
+  }
+
+  private redirectToLogin(redirectUrl: string) {
+    LocalStorageHelper.removeAuthorization();
+    this.router.navigate(['login'], { queryParams: { redirectUrl } });
   }
 }

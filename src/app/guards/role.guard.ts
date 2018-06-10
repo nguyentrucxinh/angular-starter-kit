@@ -27,24 +27,39 @@ export class RoleGuard implements CanActivate, CanActivateChild {
     console.log('Redirect URL', state.url);
     const expectedRole = next.data.expectedRole;
     if (this.global.user) {
-      return this.global.user.role_id === expectedRole;
+      if (this.global.user.role_id !== expectedRole) {
+        this.redirectToAccessDenied();
+        return false;
+      }
+      return true;
     } else {
       return new Promise((resolve) => {
         this.authService.auth()
           .then((res) => {
-            if (res.status && res.data.id && res.data.role_id === expectedRole) {
-              return resolve(true);
+            if (!res.status) {
+              this.redirectToLogin(state.url);
+              return resolve(false);
             }
-            LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
-            return resolve(false);
+            if (res.data.role_id !== expectedRole) {
+              this.redirectToAccessDenied();
+              return resolve(false);
+            }
+            return resolve(true);
           })
           .catch(err => {
-            LocalStorageHelper.removeAuthorization();
-            this.router.navigate(['login'], { queryParams: { redirectUrl: state.url } });
+            this.redirectToLogin(state.url);
             return resolve(false);
           });
       });
     }
+  }
+
+  private redirectToLogin(redirectUrl: string) {
+    LocalStorageHelper.removeAuthorization();
+    this.router.navigate(['login'], { queryParams: { redirectUrl } });
+  }
+
+  private redirectToAccessDenied() {
+    this.router.navigate(['403']);
   }
 }
