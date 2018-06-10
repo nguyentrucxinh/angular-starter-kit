@@ -16,6 +16,7 @@
 - [x] Redirect URL after login
 - [x] Multi module: AdminModule
 - [x] ReactiveFormsModule
+- [x] Validation form
 - [ ] catchError `asyn await`
 
 # RUN LOCALLY
