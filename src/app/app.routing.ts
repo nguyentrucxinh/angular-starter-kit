@@ -8,15 +8,21 @@ import {
   DashboardComponent,
   PageAccessDeniedComponent
 } from './pages/pages';
-import { USER_ROLE } from './constants/constants';
+import { USER_ROLE, ADMIN_ROLE } from './constants/constants';
 import { RoleGuard, AnonymousGuard, AuthGuard } from './guards/guards';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: '403', component: PageAccessDeniedComponent },
   { path: 'landing', component: LandingComponent },
-  { path: 'login', component: LoginComponent, canActivate: [AnonymousGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  {
+    path: '',
+    canActivateChild: [AnonymousGuard],
+    children: [
+      { path: 'login', component: LoginComponent },
+    ]
+  },
   {
     path: '',
     canActivateChild: [RoleGuard],
@@ -26,7 +32,13 @@ const routes: Routes = [
       // Another route here
       // { path: '**', component: PageNotFoundComponent }
     ]
-  }
+  },
+  {
+    path: '',
+    canActivateChild: [RoleGuard],
+    data: { expectedRole: ADMIN_ROLE },
+    children: []
+  },
 ];
 
 @NgModule({
